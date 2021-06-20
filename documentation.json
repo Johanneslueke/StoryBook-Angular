@@ -256,6 +256,81 @@
                 }
             ],
             "stylesData": ""
+        },
+        {
+            "name": "TaskComponent",
+            "id": "component-TaskComponent-2b606e58dce095af62c4a8da35fd43fe",
+            "file": "src/app/components/task/task.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-task",
+            "styleUrls": [
+                "./task.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./task.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "task",
+                    "line": 10,
+                    "type": "any"
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "onArchiveTask",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "line": 18,
+                    "type": "EventEmitter<Event>"
+                },
+                {
+                    "name": "onPinTask",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "line": 14,
+                    "type": "EventEmitter<Event>"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 22
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\n\n@Component({\n  selector: 'app-task',\n  templateUrl: './task.component.html',\n  styleUrls: ['./task.component.css']\n})\nexport class TaskComponent implements OnInit {\n\n  @Input() task: any;\n\n  // tslint:disable-next-line: no-output-on-prefix\n  @Output()\n  onPinTask : EventEmitter<Event> = new EventEmitter<Event>();\n\n  // tslint:disable-next-line: no-output-on-prefix\n  @Output()\n  onArchiveTask : EventEmitter<Event>= new EventEmitter<Event>();\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./task.component.css"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 18
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div class=\"list-item\">\n    <input type=\"text\" [value]=\"task.title\" readonly=\"true\" />\n  </div>"
         }
     ],
     "modules": [
@@ -271,6 +346,9 @@
                     "elements": [
                         {
                             "name": "AppComponent"
+                        },
+                        {
+                            "name": "TaskComponent"
                         }
                     ]
                 },
@@ -299,6 +377,32 @@
     ],
     "miscellaneous": {
         "variables": [
+            {
+                "name": "actionData",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/task/task.stories.ts",
+                "type": "object",
+                "defaultValue": "{\n    onPinTask: action(\n        'onPinTask',\n    ),\n    onArchiveTask: action(\n        'onArchiveTask'\n    ),\n}"
+            },
+            {
+                "name": "Archvied",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/task/task.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})",
+                "description": "<p>Concrete Permuation:\nYet another story describing data for an archived task</p>\n"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/task/task.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})",
+                "description": "<p>Concrete Permutation:\nDefault story with one data entry, \ndescribing a default state</p>\n"
+            },
             {
                 "name": "environment",
                 "ctype": "miscellaneous",
@@ -364,6 +468,15 @@
                 "defaultValue": "() => {\n    let storage = {};\n    return {\n      getItem: key => (key in storage ? storage[key] : null),\n      setItem: (key, value) => (storage[key] = value || ''),\n      removeItem: key => delete storage[key],\n      clear: () => (storage = {}),\n    };\n  }"
             },
             {
+                "name": "Pinned",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/task/task.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})",
+                "description": "<p>Concrete Permutation:\nAnother story describing data for a pinned task</p>\n"
+            },
+            {
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -410,12 +523,67 @@
                 "file": "src/stories/Page.stories.ts",
                 "type": "Story<Page>",
                 "defaultValue": "(args: Page) => ({\n  component: Page,\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/task/task.stories.ts",
+                "type": "Story<TaskComponent>",
+                "defaultValue": "args => ({\n    props: {\n        ...args,\n        onPinTask: actionData.onPinTask,\n        onArchiveTask: actionData.onArchiveTask,\n    },\n})",
+                "description": "<p>Generalised Story. Reason:\nAs we have multiple permutation of a component,\nit is necessary to assign it to a Template.</p>\n<p>Why:\nIntroducing the template pattern reduces the amoung\nof code you need to write and maintain.</p>\n<p>How to Apply:\n     const some_permutation = Template.bind({});\nTemplate.bind({}) create a copy of a function</p>\n"
             }
         ],
         "functions": [],
         "typealiases": [],
         "enumerations": [],
         "groupedVariables": {
+            "src/app/components/task/task.stories.ts": [
+                {
+                    "name": "actionData",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/task/task.stories.ts",
+                    "type": "object",
+                    "defaultValue": "{\n    onPinTask: action(\n        'onPinTask',\n    ),\n    onArchiveTask: action(\n        'onArchiveTask'\n    ),\n}"
+                },
+                {
+                    "name": "Archvied",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/task/task.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})",
+                    "description": "<p>Concrete Permuation:\nYet another story describing data for an archived task</p>\n"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/task/task.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})",
+                    "description": "<p>Concrete Permutation:\nDefault story with one data entry, \ndescribing a default state</p>\n"
+                },
+                {
+                    "name": "Pinned",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/task/task.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})",
+                    "description": "<p>Concrete Permutation:\nAnother story describing data for a pinned task</p>\n"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/task/task.stories.ts",
+                    "type": "Story<TaskComponent>",
+                    "defaultValue": "args => ({\n    props: {\n        ...args,\n        onPinTask: actionData.onPinTask,\n        onArchiveTask: actionData.onArchiveTask,\n    },\n})",
+                    "description": "<p>Generalised Story. Reason:\nAs we have multiple permutation of a component,\nit is necessary to assign it to a Template.</p>\n<p>Why:\nIntroducing the template pattern reduces the amoung\nof code you need to write and maintain.</p>\n<p>How to Apply:\n     const some_permutation = Template.bind({});\nTemplate.bind({}) create a copy of a function</p>\n"
+                }
+            ],
             "src/environments/environment.prod.ts": [
                 {
                     "name": "environment",
@@ -547,7 +715,7 @@
     },
     "routes": [],
     "coverage": {
-        "count": 4,
+        "count": 20,
         "status": "low",
         "files": [
             {
@@ -558,6 +726,65 @@
                 "coveragePercent": 0,
                 "coverageCount": "0/2",
                 "status": "low"
+            },
+            {
+                "filePath": "src/app/components/task/task.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TaskComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/task/task.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "actionData",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/task/task.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Archvied",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/app/components/task/task.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/app/components/task/task.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Pinned",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/app/components/task/task.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
             },
             {
                 "filePath": "src/environments/environment.prod.ts",
